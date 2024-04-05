@@ -1,8 +1,8 @@
-export default function User({ name, email, title }) {
+export default function User({ name, mail, title }) {
   return (
     <div>
       <h2>{name}</h2>
-      <p>Email: {email}</p>
+      <p>Mail: {mail}</p>
       <p>Title: {title}</p>
     </div>
   );
