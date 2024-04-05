@@ -19,7 +19,7 @@ function App() {
       <div>
         <User
           name="John Doe"
-          email="john.doe@example.com"
+          mail="john.doe@example.com"
           title="Software Engineer"
         />
       </div>
