@@ -1,42 +1,28 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import User from "./components/User";
 import viteLogo from "/vite.svg";
 
 function App() {
-  // Array of user objects
-  const users = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      title: "Software Engineer"
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      title: "Project Manager"
-    },
-    {
-      id: 3,
-      name: "Emily Johnson",
-      email: "emily.johnson@example.com",
-      title: "Designer"
-    },
-    {
-      id: 4,
-      name: "Michael Brown",
-      email: "michael.brown@example.com",
-      title: "Developer"
-    },
-    {
-      id: 5,
-      name: "Jessica Davis",
-      email: "jessica.davis@example.com",
-      title: "Product Owner"
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await fetch(
+        "https://race-rest-default-rtdb.firebaseio.com/users.json"
+      );
+      const data = await response.json();
+
+      const usersArray = Object.keys(data).map(key => ({
+        id: key,
+        ...data[key]
+      }));
+
+      setUsers(usersArray);
     }
-  ];
+    fetchUsers();
+  }, []);
 
   return (
     <>
@@ -55,7 +41,7 @@ function App() {
           <User
             key={user.id}
             name={user.name}
-            email={user.email}
+            mail={user.mail}
             title={user.title}
           />
         ))}
