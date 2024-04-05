@@ -22,6 +22,26 @@ function App() {
           email="john.doe@example.com"
           title="Software Engineer"
         />
+        <User
+          name="Jane Smith"
+          email="jane.smith@example.com"
+          title="Project Manager"
+        />
+        <User
+          name="Emily Johnson"
+          email="emily.johnson@example.com"
+          title="Designer"
+        />
+        <User
+          name="Michael Brown"
+          email="michael.brown@example.com"
+          title="Developer"
+        />
+        <User
+          name="Jessica Davis"
+          email="jessica.davis@example.com"
+          title="Product Owner"
+        />
       </div>
     </>
   );
