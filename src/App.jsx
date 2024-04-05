@@ -50,7 +50,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
 
-      <div>
+      <div className="user-grid">
         {users.map(user => (
           <User
             key={user.id}
