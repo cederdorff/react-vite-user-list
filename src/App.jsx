@@ -17,7 +17,11 @@ function App() {
       <h1>Vite + React</h1>
 
       <div>
-        <User name="John Doe" email="john.doe@example.com" title="Software Engineer" />
+        <User
+          name="John Doe"
+          email="john.doe@example.com"
+          title="Software Engineer"
+        />
       </div>
     </>
   );
