@@ -43,6 +43,7 @@ function App() {
             name={user.name}
             mail={user.mail}
             title={user.title}
+            image={user.image}
           />
         ))}
       </div>
