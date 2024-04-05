@@ -9,31 +9,31 @@ function App() {
     {
       id: 1,
       name: "John Doe",
-      email: "john.doe@example.com",
+      mail: "john.doe@example.com",
       title: "Software Engineer"
     },
     {
       id: 2,
       name: "Jane Smith",
-      email: "jane.smith@example.com",
+      mail: "jane.smith@example.com",
       title: "Project Manager"
     },
     {
       id: 3,
       name: "Emily Johnson",
-      email: "emily.johnson@example.com",
+      mail: "emily.johnson@example.com",
       title: "Designer"
     },
     {
       id: 4,
       name: "Michael Brown",
-      email: "michael.brown@example.com",
+      mail: "michael.brown@example.com",
       title: "Developer"
     },
     {
       id: 5,
       name: "Jessica Davis",
-      email: "jessica.davis@example.com",
+      mail: "jessica.davis@example.com",
       title: "Product Owner"
     }
   ];
@@ -55,7 +55,7 @@ function App() {
           <User
             key={user.id}
             name={user.name}
-            email={user.email}
+            mail={user.mail}
             title={user.title}
           />
         ))}
