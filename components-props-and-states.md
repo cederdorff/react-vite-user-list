@@ -9,8 +9,8 @@ Her er en udvidet guide med opgaver, der træner alle centrale emner for Props, 
 **Teori:**
 Props er den måde, du sender data fra én komponent til en anden i React. Props gør det muligt at genbruge komponenter med forskellige data. Du kan modtage props som enkeltværdier eller som et helt objekt, og du kan bruge destructuring til at "pakke" værdierne ud.
 
-Du arbejder med en users-datastruktur, som allerede hentes fra:
-`https://race-rest-default-rtdb.firebaseio.com/users.json`
+Du arbejder med en users-datastruktur, som hentes fra:
+`https://raw.githubusercontent.com/cederdorff/race/master/data/users.json`
 
 Test URL'en i browseren og beskriv, hvad du ser.
 
