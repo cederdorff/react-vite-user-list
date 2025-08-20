@@ -9,9 +9,7 @@ function App() {
 
   useEffect(() => {
     async function fetchUsers() {
-      const response = await fetch(
-        "https://race-rest-default-rtdb.firebaseio.com/users.json"
-      );
+      const response = await fetch("https://race-rest-default-rtdb.firebaseio.com/users.json");
       const data = await response.json();
 
       const usersArray = Object.keys(data).map(key => ({
@@ -38,13 +36,7 @@ function App() {
 
       <div className="user-grid">
         {users.map(user => (
-          <User
-            key={user.id}
-            name={user.name}
-            mail={user.mail}
-            title={user.title}
-            image={user.image}
-          />
+          <User key={user.id} name={user.name} mail={user.mail} title={user.title} image={user.image} />
         ))}
       </div>
     </>

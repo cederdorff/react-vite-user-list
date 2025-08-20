@@ -1,14 +1,18 @@
 # React Øvelser: Props, State, useState, useEffect & Komponenter
 
-Her er en udvidet guide med opgaver, der træner alle centrale emner for denne undervisningsgang. Brug workspace-koden som udgangspunkt og byg videre på eksisterende komponenter.
+Her er en udvidet guide med opgaver, der træner alle centrale emner for Props, State, useState, useEffect & Components.
 
 ---
 
 ## 1. Props: Vis alle data fra user-objektet
 
-Du arbejder med en users-datastruktur, som allerede hentes fra API'et:
+**Teori:**
+Props er den måde, du sender data fra én komponent til en anden i React. Props gør det muligt at genbruge komponenter med forskellige data. Du kan modtage props som enkeltværdier eller som et helt objekt, og du kan bruge destructuring til at "pakke" værdierne ud.
 
+Du arbejder med en users-datastruktur, som allerede hentes fra:
 `https://race-rest-default-rtdb.firebaseio.com/users.json`
+
+Test URL'en i browseren og beskriv, hvad du ser.
 
 Når data er hentet og konverteret til et array, ser hvert user-objekt sådan ud:
 
@@ -24,31 +28,18 @@ Når data er hentet og konverteret til et array, ser hvert user-objekt sådan ud
 
 ### Props og destructuring
 
-Props er data, som en komponent modtager fra sin "parent". Du kan modtage props enkeltvis med destructuring:
+**Teori:**
+Destructuring betyder at "pakke" værdier ud af et objekt, så du kan bruge dem direkte som variabler. Det gør koden mere overskuelig og nemmere at læse.
+
+Eksempler:
 
 ```jsx
 function User({ name, mail, title, image, id }) {
   // ...
 }
-```
-
-eller som ét objekt:
-
-```jsx
 function User(props) {
   // props.name, props.mail osv.
 }
-```
-
-Du kan også sende hele user-objektet som én prop:
-
-```jsx
-<User user={user} />
-```
-
-og bruge destructuring i komponenten:
-
-```jsx
 function User({ user }) {
   const { id, image, mail, name, title } = user;
   // ...
@@ -56,6 +47,79 @@ function User({ user }) {
 ```
 
 ---
+
+### Opgave 1: Vis alle props fra user-objektet
+
+**Step 0: Udforsk props og destructuring**
+
+Før du går videre, skal du teste de tre måder at modtage data i User-komponenten:
+
+1. Modtag props enkeltvis med destructuring:
+
+   ```jsx
+   function User({ name, mail, title, image, id }) {
+     // Nu kan du bruge name, mail osv. direkte
+     console.log("Enkeltvis props:", name, mail, title, image, id);
+     // ...
+   }
+   // I App.jsx:
+   <User name={user.name} mail={user.mail} title={user.title} image={user.image} id={user.id} />;
+   ```
+
+2. Modtag props som ét objekt:
+
+   ```jsx
+   function User(props) {
+     console.log("Props-objekt:", props);
+     // ...
+   }
+   // I App.jsx:
+   <User name={user.name} mail={user.mail} title={user.title} image={user.image} id={user.id} />;
+   ```
+
+3. Modtag hele user-objektet som én prop og brug destructuring:
+   ```jsx
+   function User({ user }) {
+     const { id, image, mail, name, title } = user;
+     console.log("User-objekt:", user);
+     // ...
+   }
+   // I App.jsx:
+   <User user={user} />;
+   ```
+
+Prøv alle tre versioner, se output i konsollen og skriv en kommentar om forskellen.
+
+---
+
+**Step 1:**  
+Brug den metode du bedst kan lide fra Step 0 til at udvide `User`-komponenten, så den viser ALLE props fra user-objektet:
+
+- id
+- image
+- mail
+- name
+- title
+
+**Step 2:**  
+Sørg for at alle felter vises tydeligt og med passende styling.
+
+- Brug fx et billede-tag til `image`, og vis de andre felter som tekst.
+
+**Step 3:**  
+Lav en validering i `User`, så hvis en prop mangler, vises en default-værdi.
+
+- Fx: Hvis `image` mangler, vis et placeholder-billede.
+
+**Step 4:**  
+Forklar med kommentarer i koden, hvad `{}` gør i funktionshovedet.
+
+- Skriv en kort kommentar over funktionshovedet.
+
+**Ekstra hjælp:**
+
+- Start med at vise props enkeltvis, og refaktorér derefter til at bruge et user-objekt.
+- Brug `console.log(props)` eller `console.log(user)` for at se data i konsollen.
 
 ---
 
@@ -112,8 +176,8 @@ function User({ user }) {
 
 ### Opgave 2: State – Dynamiske data og interaktivitet
 
-**Kort forklaring:**
-Med useState kan du oprette og opdatere lokale data (state) i en komponent. State bruges til at gøre din komponent interaktiv og dynamisk.
+**Teori:**
+State er Reacts måde at holde styr på data, der kan ændre sig over tid – fx inputfelter, klik på knapper eller data hentet fra en server. State oprettes med useState-hooket, og når du opdaterer state, genrender React din komponent med de nye data.
 
 Eksempel:
 
@@ -175,8 +239,8 @@ _Brug showDetails til at styre om detaljerne vises:_
 
 ### Opgave 3: useEffect – Sideeffekter og datahentning
 
-**Kort forklaring:**
-Med useEffect kan du udføre sideeffekter i din komponent, fx datahentning, logging eller opdatering af DOM. useEffect kører, når komponenten renderes eller når en bestemt state/prop ændres.
+**Teori:**
+useEffect er et React-hook, der bruges til at udføre "sideeffekter" i din komponent – fx hente data, logge til konsollen eller opdatere DOM. useEffect kører, når komponenten renderes, eller når en bestemt state/prop ændres. Du kan styre, hvornår useEffect kører, ved at angive en "dependency array" som andet argument.
 
 Eksempel:
 
@@ -232,8 +296,11 @@ useEffect(() => {
 
 ### Opgave 4: Components – Struktur og genbrug
 
+**Teori:**
+En komponent i React er en genanvendelig byggeklods, der kan indeholde både logik og UI. Ved at opdele din app i flere komponenter bliver koden mere overskuelig og nemmere at vedligeholde. Du kan importere og bruge dine egne komponenter, og du kan sende data og funktioner til dem via props.
+
 **Step 1:**  
-Lav en ny komponent, fx `Header` eller `UserList`, og brug den i `App`.  
+Lav en `Header`-komponent, der viser en overskrift for din app.  
 _Hjælp: Opret en ny fil fx `Header.jsx` og lav en simpel komponent:_
 
 ```jsx
@@ -243,15 +310,15 @@ function Header() {
 export default Header;
 ```
 
-_Importér og brug i App:_
+Importér og brug i App:
 
 ```jsx
 import Header from "./Header";
 ```
 
 **Step 2:**  
-Flyt brugerlisten til en separat `UserList`-komponent, der modtager `users` som prop.  
-_Hjælp:_
+Lav en `UserList`-komponent, der modtager `users` som prop og viser listen af brugere.  
+_Hjælp: Opret en ny fil fx `UserList.jsx` og brug map til at vise alle brugere:_
 
 ```jsx
 function UserList({ users }) {
@@ -263,15 +330,63 @@ function UserList({ users }) {
     </div>
   );
 }
+export default UserList;
+```
+
+Importér og brug i App:
+
+```jsx
+import UserList from "./UserList";
 ```
 
 **Step 3:**  
 Lav en `Footer`-komponent med copyright/info.  
-_Hjælp: Opret en simpel Footer-komponent og brug den nederst i App._
+_Hjælp: Opret en ny fil fx `Footer.jsx` og lav en simpel komponent:_
+
+```jsx
+function Footer() {
+  return <footer>© 2025 Dit navn</footer>;
+}
+export default Footer;
+```
+
+Importér og brug nederst i App:
+
+```jsx
+import Footer from "./Footer";
+```
 
 **Step 4:**  
 Lav en “UserCard”-komponent, som bruges af `UserList` til at vise hver bruger.  
-_Hjælp: Opret en UserCard-komponent, og brug den i stedet for User i UserList._
+_Hjælp: Opret en ny fil fx `UserCard.jsx` og brug den i stedet for User i UserList:_
+
+```jsx
+function UserCard({ user }) {
+  // Vis brugerens data her
+  return (
+    <div>
+      <img src={user.image} alt={user.name} />
+      <p>{user.name}</p>
+      <p>{user.mail}</p>
+      <p>{user.title}</p>
+    </div>
+  );
+}
+export default UserCard;
+```
+
+Brug i UserList:
+
+```jsx
+import UserCard from "./UserCard";
+// ...
+{
+  users.map(user => <UserCard user={user} key={user.id} />);
+}
+```
+
+**Step 5 (Ekstra):**
+Lav endnu en lille komponent, fx `AppInfo`, der viser information om appen (fx antal brugere eller en kort beskrivelse). Brug den i toppen eller bunden af din app.
 
 ---
 
@@ -279,45 +394,128 @@ _Hjælp: Opret en UserCard-komponent, og brug den i stedet for User i UserList._
 
 ### Opgave 5: Dataflow – Tilføj og fjern brugere
 
+**Teori:**
+Dataflow i React handler om, hvordan data bevæger sig gennem din app. Typisk "løber" data fra parent til child via props, og du kan opdatere data med state og event handlers. Når du vil ændre data (fx tilføje eller slette brugere), opdaterer du state i parent-komponenten, og sender eventuelle funktioner som props til child-komponenter.
+
 **Step 1:**  
-Tilføj en formular i `App` til at oprette en ny bruger (navn, mail, titel, billede, alder).  
-_Hjælp: Opret en state-variabel til formdata, fx:_
+Byg din løsning op trin for trin, så du kan teste og forstå hvert skridt:
+
+**Step 1a:**
+Opret en state-variabel til brugerne, hvis ikke du allerede har:
 
 ```jsx
-const [formData, setFormData] = useState({ name: "", mail: "", title: "", image: "", age: "" });
+const [users, setUsers] = useState([]);
 ```
 
-_Lav inputs og en submit-knap. Brug onChange til at opdatere formData._
+Test at din app ikke crasher, og at du kan bruge `users`.
+
+**Step 1b:**
+Lav en simpel formular med ét inputfelt og en submit-knap:
+
+```jsx
+<form onSubmit={handleSubmit}>
+  <input name="name" placeholder="Navn" />
+  <button type="submit">Tilføj bruger</button>
+</form>
+```
+
+Test at du kan skrive i feltet og trykke på knappen.
+
+**Step 1c:**
+Lav en handleSubmit-funktion, der læser værdien fra inputfeltet og tilføjer en bruger til listen:
+
+```jsx
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const newUser = {
+    id: crypto.randomUUID(),
+    name: form.name.value
+  };
+  setUsers([...users, newUser]);
+  form.reset();
+}
+```
+
+Test at du kan tilføje en bruger med navn til listen.
+
+**Step 1d:**
+Udvid formularen med flere inputfelter (mail, titel, billede, alder):
+
+```jsx
+<form onSubmit={handleSubmit}>
+  <input name="name" placeholder="Navn" />
+  <input name="mail" placeholder="Mail" />
+  <input name="title" placeholder="Titel" />
+  <input name="image" placeholder="Billede-URL" />
+  <input name="age" placeholder="Alder" />
+  <button type="submit">Tilføj bruger</button>
+</form>
+```
+
+Opdater handleSubmit, så den læser alle felter:
+
+```jsx
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const newUser = {
+    id: crypto.randomUUID(),
+    name: form.name.value,
+    mail: form.mail.value,
+    title: form.title.value,
+    image: form.image.value,
+    age: form.age.value
+  };
+  setUsers([...users, newUser]);
+  form.reset();
+}
+```
+
+Test at du kan tilføje en bruger med alle felter.
 
 **Step 2:**  
-Når formularen submitter, tilføjes brugeren til listen (brug `setUsers`).  
-_Hjælp:_
+Når formularen submitter, tilføjes brugeren til listen (brug `setUsers`).
 
-```jsx
-const handleAddUser = () => {
-  setUsers([...users, { ...formData, id: crypto.randomUUID() }]);
-};
-```
+_Hjælp: Se eksemplet ovenfor – brugeren tilføjes i handleSubmit-funktionen._
 
 **Step 3:**  
-Tilføj en “slet bruger”-knap på hvert kort, der fjerner brugeren fra listen.  
+Tilføj en “slet bruger”-knap på hvert kort, der fjerner brugeren fra listen.
+
 _Hjælp:_
 
+1. Lav en funktion i din App-komponent, der kan fjerne en bruger fra listen:
+
 ```jsx
-const handleDeleteUser = id => {
+function handleDeleteUser(id) {
   setUsers(users.filter(user => user.id !== id));
-};
+}
 ```
 
-**Step 4:**  
-Gør det muligt at redigere en brugers oplysninger via en formular.  
-_Hjælp: Lav en form, der kan vise og opdatere en brugers data. Brug state til at holde styr på hvilken bruger der redigeres._
+2. Du kan også sende funktioner som props til dine komponenter – ligesom du sender data! Det gør det muligt for fx UserCard at "fortælle" App, at en bruger skal slettes. Eksempel:
+
+```jsx
+<UserCard user={user} onDelete={handleDeleteUser} />
+```
+
+3. Inde i UserCard kan du nu bruge funktionen, som du har fået som prop:
+
+```jsx
+<button onClick={() => onDelete(user.id)}>Slet</button>
+```
+
+Når du klikker på knappen, kaldes funktionen i App med brugerens id, og brugeren fjernes fra listen.
+
+4. Test at du kan slette brugere fra listen ved at klikke på knappen.
 
 ---
 
 ---
 
 ### Opgave 6: Ekstra – Filtrering og søgning
+
+**Teori:**
+Filtrering og søgning i React handler om at vise et udsnit af dine data baseret på brugerens input. Du kan bruge state til at holde styr på søgetekst og filtervalg, og bruge JavaScript's array-metoder (fx filter og includes) til at vise de rigtige data.
 
 **Step 1:**  
 Tilføj en søgefunktion, så man kan filtrere brugere efter navn.  
